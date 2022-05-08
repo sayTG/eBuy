@@ -61,11 +61,11 @@ namespace eBuy.Controllers
         public IActionResult EditProduct(Guid? productId)
         {
             if (productId == null)
-                return NotFound();
+                return View("~/Views/404.cshtml");
             Products product = _productService.GetProduct(productId);
             ProductsViewModel productsViewModel = _customMapping.OutMap(product, new ProductsViewModel());
             if (product == null)
-                return NotFound();
+                return View("~/Views/404.cshtml");
             return View(productsViewModel);
         }
         [HttpPost]
