@@ -1,6 +1,7 @@
 ﻿@model eBuy.ViewModels.ProductsViewModel
 
-@{ ViewData["Title"] = "Create";
+@{
+    ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -25,9 +26,9 @@
     </section>
     <div class="row d-flex justify-content-center">
         <div class="col-6">
-            <form asp-action="CreateProduct" enctype="multipart/form-data" class="row d-md-flex">
+            <form asp-action="EditProduct" enctype="multipart/form-data" class="row d-md-flex">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="DateCreated" value="@DateTime.Now" />
+                <input type="hidden" asp-for="ProductId" />
                 <input type="hidden" asp-for="DateModified" value="@DateTime.Now" />
                 <div class="form-group col-md-12">
                     <label asp-for="Name" class="control-label">Product Name</label>
@@ -55,8 +56,8 @@
                     <span asp-validation-for="IsEnabled" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-12">
-                    <label asp-for="File" class="control-label">Select Product Image</label>
-                    <input asp-for="File" class="form-control" type="file" accept=".png,.jpg,.jpeg" required />
+                    <label asp-for="File" class="control-label">Update Product Image</label>
+                    <input asp-for="File" class="form-control" type="file" accept=".png,.jpg,.jpeg" />
                     <span asp-validation-for="File" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-12">
@@ -66,9 +67,8 @@
         </div>
     </div>
 </div>
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
-
 

@@ -122,7 +122,8 @@ function loadDataTable(controller, columns, order = 1, tableName = '#DT_load', h
 
 }
 
-function Delete(controller, id) {
+function Delete(controller, productId) {
+    console.log("Entered");
     swal({
         title: "Are you sure?",
         text: "Once deleted, you will not be able to recover. (Only Admins can delete)",
@@ -133,7 +134,7 @@ function Delete(controller, id) {
         if (willDelete) {
             $.ajax({
                 type: "DELETE",
-                url: '/' + controller + '/delete?id=' + id,
+                url: '/' + controller + '/delete?productId=' + productId,
                 success: function (data) {
                     if (data.success) {
                         toastr.success(data.message);

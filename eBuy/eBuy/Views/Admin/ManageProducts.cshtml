@@ -48,7 +48,7 @@
                 },
                 {
                     'data': function (data) {
-                        return `<div class="text-center"><a class="ml-1 mr-1" href="/${controller}/edit?id=${data.id}"><span class="fa fa-pencil"></span></a><a href="#" onclick=Delete("admin",${data.id})><span class="fa fa-trash"></span></a></div>`
+                        return `<div class="text-center"><a class="ml-1 mr-1" href="/${controller}/editproduct?productId=${data.productId}"><span class="fa fa-pencil"></span></a><a href="#" onclick=Delete("admin",'${data.productId}')><span class="fa fa-trash"></span></a></div>`
                     }
                 },
                 { "data": "id" }

@@ -8,6 +8,7 @@ namespace eBuy.DTOs
     public class ProductDTO
     {
         public int id { get; set; }
+        public Guid productId { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public int quantity { get; set; }

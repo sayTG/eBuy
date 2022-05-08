@@ -1,5 +1,6 @@
 using eBuy.Abstractions;
 using eBuy.Data;
+using eBuy.EntityMapping;
 using eBuy.Implementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -44,6 +45,7 @@ namespace eBuy
                 o.JsonSerializerOptions.DictionaryKeyPolicy = null;
             });
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICustomMapping, CustomMapping>();
 
         }
 

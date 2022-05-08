@@ -1,10 +1,7 @@
 ﻿using eBuy.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace eBuy.Data
 {
@@ -17,6 +14,11 @@ namespace eBuy.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<Products>(builder =>
+            {
+                builder.Property(e => e.Id).ValueGeneratedOnAdd()
+                .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+            });
             SampleData.SeedUsers(builder);
             SampleData.SeedRoles(builder);
             SampleData.SeedUserRoles(builder);

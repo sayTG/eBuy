@@ -9,6 +9,7 @@ namespace eBuy.ViewModels
 {
     public class ProductsViewModel
     {
+        public Guid ProductId { get; set; }
         [Required(ErrorMessage = "Product Name cannot be empty")]
         public string Name { get; set; }
         public string Description { get; set; }

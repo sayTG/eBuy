@@ -12,5 +12,9 @@ namespace eBuy.Abstractions
     {
         Task<bool> AddNewProductAsync(ProductsViewModel productViewModel);
         Task<ProductImages> AddProductImage(IFormFile formFile, Guid productId);
+        Products GetProduct(Guid? productId);
+        ProductImages GetProductImage(Guid? productId);
+        Task<bool> EditProduct(Guid productId, ProductsViewModel productViewModel);
+        Task<bool> DeleteProduct(Guid productId);
     }
 }
