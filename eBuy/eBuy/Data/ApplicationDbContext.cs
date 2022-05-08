@@ -17,6 +17,9 @@ namespace eBuy.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            SampleData.SeedUsers(builder);
+            SampleData.SeedRoles(builder);
+            SampleData.SeedUserRoles(builder);
         }
 
         public DbSet<Products> Products { get; set; }

@@ -1,0 +1,74 @@
+﻿@model eBuy.ViewModels.ProductsViewModel
+
+@{ ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <section class="p-0">
+        <div class="container">
+            <div class="row">
+                @if (!string.IsNullOrWhiteSpace((string)TempData["Msg"]))
+                {
+                    @if ((bool)TempData["success"])
+                    {
+                        <div class="Msg col-12 text-center alert alert-success">
+                            @TempData["Msg"]
+                        </div> }
+                    else
+                    {
+                        <div class="Msg col-12 text-center alert alert-danger">
+                            @TempData["Msg"]
+                        </div>}}
+            </div>
+        </div>
+    </section>
+    <div class="row d-flex justify-content-center">
+        <div class="col-6">
+            <form asp-action="Create" enctype="multipart/form-data" class="row d-md-flex">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="DateCreated" value="@DateTime.Now" />
+                <input type="hidden" asp-for="DateModified" value="@DateTime.Now" />
+                <div class="form-group col-md-12">
+                    <label asp-for="Name" class="control-label">Product Name</label>
+                    <input asp-for="Name" class="form-control" required />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-12">
+                    <label asp-for="Description" class="control-label">Product Description</label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-12">
+                    <label asp-for="Quantity" class="control-label">Product Quantity</label>
+                    <input asp-for="Quantity" class="form-control" type="number" step="0.01" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-12">
+                    <label asp-for="UnitPrice" class="control-label">Unit Price</label>
+                    <input asp-for="UnitPrice" class="form-control" type="number" required />
+                    <span asp-validation-for="UnitPrice" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-12">
+                    <label asp-for="IsEnabled" class="control-label">Enabled</label>
+                    <input asp-for="IsEnabled" class="form-control" type="checkbox" />
+                    <span asp-validation-for="IsEnabled" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-12">
+                    <label asp-for="File" class="control-label">Select Product Image</label>
+                    <input asp-for="File" class="form-control" type="file" accept=".png,.jpg,.jpeg" required />
+                    <span asp-validation-for="File" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-12">
+                    <input type="submit" value="Create" class="btn btn-primary btn-block btn-lg" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+

@@ -34,7 +34,10 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+                <ol class="breadcrumb" style="background-color: #fff;">
+                    <li class="breadcrumb-item"><h3>@ViewData["Title"]</h3></li>
+                </ol>
+                @RenderBody()
         </main>
     </div>
 

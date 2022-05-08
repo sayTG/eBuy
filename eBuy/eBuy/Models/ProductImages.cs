@@ -9,7 +9,7 @@ namespace eBuy.Models
     {
         public int Id { get; set; }
         public byte[] Image { get; set; }
-        public int ProductId { get; set; }
+        public Guid ProductId { get; set; }
         public Products Product { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
