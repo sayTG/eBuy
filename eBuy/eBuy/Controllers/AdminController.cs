@@ -1,6 +1,7 @@
 ﻿using DataTablesParser;
 using eBuy.Abstractions;
 using eBuy.Data;
+using eBuy.DTOs;
 using eBuy.Models;
 using eBuy.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -60,8 +61,19 @@ namespace eBuy.Controllers
         #region API CALLS
         public IActionResult GetAll()
         {
-            var query = from p in _context.Products select p;
-            var parser = new Parser<Products>(Request.Form, query);
+            var query = from p in _context.Products.Where(p => p.Id != p.Deleted)
+                        select new ProductDTO
+                        {
+                            id = p.Id,
+                            name = p.Name,
+                            description = p.Description,
+                            quantity = p.Quantity,
+                            unitPrice = p.UnitPrice,
+                            isEnabled = p.IsEnabled,
+                            dateCreated = p.DateCreated,
+                            dateModified = p.DateModified
+                        };
+            var parser = new Parser<ProductDTO>(Request.Form, query);
             return Json(parser.Parse());
         }
         #endregion

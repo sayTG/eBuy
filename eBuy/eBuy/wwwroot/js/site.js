@@ -73,18 +73,18 @@ function loadDataTable(controller, columns, order = 1, tableName = '#DT_load', h
         "ajax": {
             "url": "/" + controller + "/getall",
             "timeout": 600000,
-            "type": "POST"
+            "type": "POST",
 
-            /*"datatype": "json",*/
-            /*"success": function (data) {
-                console.log(data);
-            } */
+            //"datatype": "json",
+            //"success": function (data) {
+            //    console.log(data);
+            //} 
         },
         'columnDefs': [{
             'targets': columns.length - 1,
             'searchable': false,
             'orderable': false,
-            'data': 'Id',
+            'data': 'id',
             'type': 'checkbox',
             'checkboxes': {
                 'selectRow': true

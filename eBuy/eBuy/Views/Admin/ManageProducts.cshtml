@@ -1,4 +1,4 @@
-﻿
+﻿@model eBuy.ViewModels.ProductsViewModel
 
 <div class="container">
     <p class="mb-5">
@@ -29,16 +29,16 @@
         $(document).ready(function () {
             var controller = "admin";
             var columns = [
-                { "data": "Id" },
-                { "data": "Name" },
-                { "data": "Description" },
-                { "data": "Quantity" },
-                { "data": "UnitPrice" },
-                { "data": "CreatedDate" },
-                { "data": "ModifiedDate" },
+                { "data": "id" },
+                { "data": "name" },
+                { "data": "description" },
+                { "data": "quantity" },
+                { "data": "unitPrice" },
+                { "data": "dateCreated" },
+                { "data": "dateModified" },
                 {
                     'data': function (data) {
-                        if (data.IsEnabled == true) {
+                        if (data.isEnabled == true) {
                             return `<h4 class="text-center"><span class="text-success font-weight-bold">&#10003;</span></h4>`
                         }
                         else {
@@ -48,10 +48,10 @@
                 },
                 {
                     'data': function (data) {
-                        return `<div class="text-center"><a class="ml-1 mr-1" href="/${controller}/edit?id=${data.Id}"><span class="fa fa-pencil"></span></a><a href="#" onclick=Delete("admin",${data.Id})><span class="fa fa-trash"></span></a></div>`
+                        return `<div class="text-center"><a class="ml-1 mr-1" href="/${controller}/edit?id=${data.id}"><span class="fa fa-pencil"></span></a><a href="#" onclick=Delete("admin",${data.id})><span class="fa fa-trash"></span></a></div>`
                     }
                 },
-                { "data": "Id" }
+                { "data": "id" }
 
             ];
             loadDataTable(controller, columns, 8);
