@@ -33,7 +33,7 @@ namespace eBuy.Controllers
             else
                 return View("~/Views/500.cshtml");
         }
-        public IActionResult ViewCart()
+        public IActionResult Index()
         {
             return View();
         }
