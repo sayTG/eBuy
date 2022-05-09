@@ -32,6 +32,8 @@ namespace eBuy.Implementation
             {
                 ProductImages image = _productService.GetProductImage(product.ProductId);
                 HomeViewProducts viewProduct = _customMapping.OutMap(product, image, new HomeViewProducts());
+                int  quan = _cartService.ActiveCartQuantity(userId, product.ProductId);
+                viewProduct.QuantityAdded = quan == 0 ? 1 : quan;
                 viewProducts.Add(viewProduct);
             }
             if (userId != null)

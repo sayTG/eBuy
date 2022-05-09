@@ -1,17 +1,14 @@
-﻿using eBuy.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging; 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Security.Principal;
+﻿using eBuy.Abstractions;
 using eBuy.Data;
-using Microsoft.AspNetCore.Identity;
-using eBuy.Abstractions;
+using eBuy.Models;
 using eBuy.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace eBuy.Controllers
 {
@@ -21,11 +18,13 @@ namespace eBuy.Controllers
         private readonly ILogger<HomeController> _logger;
         private UserManager<ApplicationUser> _userManager;
         private readonly IHomeService _homeService;
-        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager, IHomeService homeService)
+        private readonly ICartService _cartService;
+        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager, IHomeService homeService, ICartService cartService)
         {
             _logger = logger;
             _userManager = userManager;
             _homeService = homeService;
+            _cartService = cartService;
         }
 
         public IActionResult Index()
@@ -35,7 +34,23 @@ namespace eBuy.Controllers
             return View(viewModel);
         }
 
+        public async Task<IActionResult> AddToCart(Guid productId, int quantity)
+        {
+            string userId = _userManager.GetUserId(HttpContext.User);
+            bool result = await _cartService.AddToCart(productId, quantity, userId);
+            if (result)
+            {
+                HomeViewModel viewModel = _homeService.DisplayProducts(userId);
+                return View("Index", viewModel);
+            }
+            else
+                return View("~/Views/500.cshtml");
+        }
         public IActionResult Privacy()
+        {
+            return View();
+        }
+        public IActionResult ViewCart()
         {
             return View();
         }

@@ -71,3 +71,47 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+.cart {
+    font-weight: bold;
+    margin: 20px;
+}
+.picture {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+.title {
+    padding: 0 0 15px;
+    font-size: 30px;
+    font-weight: 400;
+    color: #444;
+}
+.cart-text {
+    font-style: italic;
+    font-size: large;
+}
+.item-box {
+    position: relative;
+    float: left;
+    text-align: left;
+}
+.details {
+    margin-top: 5px;
+    padding: 5px 10px;
+}
+.product-title {
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: #4ab2f1;
+    padding: 0px;
+    margin: 0px;
+}
+.actual-price {
+    margin: 0 5px 0 0;
+    font-size: 16px;
+    color: #666;
+}
+.prod-quantity {
+    padding: 3px;
+}

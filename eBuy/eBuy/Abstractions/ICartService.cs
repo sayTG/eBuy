@@ -8,5 +8,7 @@ namespace eBuy.Abstractions
     public interface ICartService
     {
         int UserCartCount(string userId);
+        Task<bool> AddToCart(Guid productId, int quantity, string userId);
+        int ActiveCartQuantity(string userId, Guid productId);
     }
 }
