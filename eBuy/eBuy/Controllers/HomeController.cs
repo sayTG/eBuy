@@ -11,9 +11,11 @@ using eBuy.Data;
 using Microsoft.AspNetCore.Identity;
 using eBuy.Abstractions;
 using eBuy.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eBuy.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

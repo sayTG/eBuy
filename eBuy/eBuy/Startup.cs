@@ -53,6 +53,11 @@ namespace eBuy
                                  .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Identity/Account/Login";
+                options.SlidingExpiration = true;
+            });
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICustomMapping, CustomMapping>();
             services.AddScoped<ICartService, CartService>();

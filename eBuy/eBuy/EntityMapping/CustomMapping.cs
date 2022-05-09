@@ -28,7 +28,7 @@ namespace eBuy.EntityMapping
             viewProducts.Quantity = products.Quantity;
             viewProducts.Description = products.Description;
             viewProducts.Name = products.Name;
-            viewProducts.File = Convert.ToBase64String(productImage.Image);
+            viewProducts.File = "data:image/png;base64," + Convert.ToBase64String(productImage.Image);
             return viewProducts;
         }
     }
