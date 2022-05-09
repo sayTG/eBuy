@@ -28,23 +28,23 @@ namespace eBuy.Controllers
         {
             return View();
         }
-        public IActionResult ManageProducts()
+        public IActionResult Manage()
         {
             return View();
         }
-        public IActionResult CreateProduct()
+        public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateProduct(ProductsViewModel product)
+        public async Task<IActionResult> Create(ProductsViewModel product)
         {
             if (ModelState.IsValid)
             {
                 bool result = await _productService.AddNewProductAsync(product);
                 if (result)
-                    return RedirectToAction(nameof(ManageProducts));
+                    return RedirectToAction(nameof(Manage));
                 else
                 {
                     TempData["Success"] = false;
@@ -56,9 +56,9 @@ namespace eBuy.Controllers
                 TempData["Success"] = false;
                 TempData["Msg"] = "Model State not valid";
             }
-            return View("createproduct", product);
+            return View("create", product);
         }
-        public IActionResult EditProduct(Guid? productId)
+        public IActionResult Edit(Guid? productId)
         {
             if (productId == null)
                 return View("~/Views/404.cshtml");
@@ -70,20 +70,20 @@ namespace eBuy.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditProduct(Guid productId, ProductsViewModel productsViewModel)
+        public async Task<IActionResult> Edit(Guid productId, ProductsViewModel productsViewModel)
         {
             if (ModelState.IsValid)
             {
                 bool result = await _productService.EditProduct(productId, productsViewModel);
                 if (result)
-                    return RedirectToAction(nameof(ManageProducts));
+                    return RedirectToAction(nameof(Manage));
                 else
                 {
                     TempData["Success"] = false;
                     TempData["Msg"] = "An Error Occured";
                 }
             }
-            return View("editproduct", productsViewModel);
+            return View("edit", productsViewModel);
         }
         public async Task<IActionResult> Delete(Guid productId)
         {

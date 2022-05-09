@@ -33,24 +33,7 @@ namespace eBuy.Controllers
             HomeViewModel viewModel = _homeService.DisplayProducts(userId);
             return View(viewModel);
         }
-
-        public async Task<IActionResult> AddToCart(Guid productId, int quantity)
-        {
-            string userId = _userManager.GetUserId(HttpContext.User);
-            bool result = await _cartService.AddToCart(productId, quantity, userId);
-            if (result)
-            {
-                HomeViewModel viewModel = _homeService.DisplayProducts(userId);
-                return View("Index", viewModel);
-            }
-            else
-                return View("~/Views/500.cshtml");
-        }
         public IActionResult Privacy()
-        {
-            return View();
-        }
-        public IActionResult ViewCart()
         {
             return View();
         }

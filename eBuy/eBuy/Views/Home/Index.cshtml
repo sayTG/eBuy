@@ -3,7 +3,7 @@
 <div class="row d-flex justify-content-between">
     <div class="title"><strong>Featured products</strong></div>
     <div class="cart">
-        <i class="fas fa-shopping-cart fa-lg"></i> @Html.ActionLink("Cart(" + Model.CartCount + ")", "ViewCart", "Home", null, new { @class = "cart-text" })
+        <i class="fas fa-shopping-cart fa-lg"></i> @Html.ActionLink("Cart(" + Model.CartCount + ")", "ViewCart", "Cart", null, new { @class = "cart-text" })
     </div>
 
 </div>
@@ -17,7 +17,7 @@ else
     <div class="item-grid">
         @foreach (var product in Model.HomeViewProducts)
         {
-            using (Html.BeginForm("AddToCart", "Home"))
+            using (Html.BeginForm("AddToCart", "Cart"))
             {
                 <div class="item-box">
                     <div class="product-item">

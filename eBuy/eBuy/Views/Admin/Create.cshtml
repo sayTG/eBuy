@@ -25,7 +25,7 @@
     </section>
     <div class="row d-flex justify-content-center">
         <div class="col-6">
-            <form asp-action="CreateProduct" enctype="multipart/form-data" class="row d-md-flex">
+            <form asp-action="Create" enctype="multipart/form-data" class="row d-md-flex">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="DateCreated" value="@DateTime.Now" />
                 <input type="hidden" asp-for="DateModified" value="@DateTime.Now" />
