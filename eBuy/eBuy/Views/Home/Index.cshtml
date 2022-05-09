@@ -1,8 +1,76 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model eBuy.ViewModels.HomeViewModel
+
+@{
+    ViewBag.Title = "Shop";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+    <h2 class="col-md-4">Shop</h2>
+
+    <label style="font: bold; font-family: Arial; margin:20px;">
+        <i class="fas fa-shopping-cart"></i>  @Html.ActionLink("Cart(" + Model.CartCount + ")", "ViewCart", "Home")
+    </label>
+
 </div>
+
+@if (Model.HomeViewProducts.Count < 1)
+{
+    <h4 class="text-danger" align="center">Out of Stock</h4>
+}
+else
+{
+    int count = 0;
+
+    foreach (var product in Model.HomeViewProducts)
+    {
+        using (Html.BeginForm("AddToCart", "Home"))
+        {
+            var x = count;
+            <div class="row" style="border:5px #808080">
+                <input id="prodId_@x" type="hidden" value="@product.ProductId" name="productID" />
+                <div class="col-md-4">
+                    <h3>@product.Name</h3>
+                    <img src="@product.File" alt="Logo" style="width:350px; height: 200px;" />
+                </div>
+                <div class="col-md-4">
+                    <h3>Item Descrption</h3>
+                    <p>@product.Description</p>
+
+                </div>
+
+                <div class="col-md-4">
+                    <h3>Actions</h3>
+
+                    <div class="form-group">
+                        <label>Unit Price:</label>
+                        <div>
+                            <input id="prodPrice_@x" type="text" value="@product.UnitPrice" disabled />
+                        </div>
+                    </div>
+                    @if (product.Quantity > 0)
+                    {
+                        <div class="form-group">
+                            <label>Quantity:</label>
+                            <div>
+                                <input id="prodQuant_@x" type="number" min="1" value="1" name="productQuantity" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Add to Cart" min="0" class="btn-lg btn-success" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <label>Quantity:</label>
+                            <div>
+                                <input type="text" value="Out of Stock" disabled class="text-danger" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    }
+}

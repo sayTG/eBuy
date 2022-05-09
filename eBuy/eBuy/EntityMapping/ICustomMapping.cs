@@ -10,5 +10,6 @@ namespace eBuy.EntityMapping
     public interface ICustomMapping
     {
         ProductsViewModel OutMap(Products products, ProductsViewModel productsViewModel);
+        HomeViewProducts OutMap(Products products, ProductImages productImage, HomeViewProducts viewProducts);
     }
 }

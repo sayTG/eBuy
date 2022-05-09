@@ -2,9 +2,11 @@ using eBuy.Abstractions;
 using eBuy.Data;
 using eBuy.EntityMapping;
 using eBuy.Implementation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,8 +46,17 @@ namespace eBuy
                 o.JsonSerializerOptions.PropertyNamingPolicy = null;
                 o.JsonSerializerOptions.DictionaryKeyPolicy = null;
             });
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICustomMapping, CustomMapping>();
+            services.AddScoped<ICartService, CartService>();
+            services.AddScoped<IHomeService, HomeService>();
 
         }
 

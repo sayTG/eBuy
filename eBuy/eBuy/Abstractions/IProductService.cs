@@ -16,5 +16,6 @@ namespace eBuy.Abstractions
         ProductImages GetProductImage(Guid? productId);
         Task<bool> EditProduct(Guid productId, ProductsViewModel productViewModel);
         Task<bool> DeleteProduct(Guid productId);
+        List<Products> GetAllProduct();
     }
 }

@@ -5,6 +5,7 @@ using eBuy.Utilities;
 using eBuy.ViewModels;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -132,6 +133,10 @@ namespace eBuy.Implementation
                 Console.WriteLine(e.Message);
                 return false;
             }
+        }
+        public List<Products> GetAllProduct()
+        {
+            return _context.Products.Where(x => x.Id != x.Deleted).ToList();
         }
     }
 }

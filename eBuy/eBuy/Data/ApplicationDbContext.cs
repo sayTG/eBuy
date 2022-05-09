@@ -26,5 +26,6 @@ namespace eBuy.Data
 
         public DbSet<Products> Products { get; set; }
         public DbSet<ProductImages> ProductImages { get; set; }
+        public DbSet<Cart> Cart { get; set; }
     }
 }
