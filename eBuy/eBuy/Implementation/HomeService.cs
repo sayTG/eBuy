@@ -23,6 +23,7 @@ namespace eBuy.Implementation
             _customMapping = customMapping;
             _cartService = cartService;
         }
+        //Display list products added to cart and Image
         public HomeViewModel DisplayProducts(string userId)
         {
             int count = 0;

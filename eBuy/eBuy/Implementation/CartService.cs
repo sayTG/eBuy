@@ -22,14 +22,17 @@ namespace eBuy.Implementation
             _productService = productService;
             _customMapping = customMapping;
         }
+        //Get the cart count
         public int UserCartCount(string userId)
         {
             return _context.Cart.Where(x => x.Id != x.Deleted && x.UserId == userId).Count();
         }
+        //Get the quantity of a particular product added to cart
         public int ActiveCartQuantity(string userId, Guid productId)
         {
             return _context.Cart.Where(x => x.Id != x.Deleted && x.UserId == userId && x.ProductId == productId).Select(x => x.Quantity).FirstOrDefault();
         }
+        //Add product to cart
         public async Task<bool> AddToCart(Guid productId, int quantity, string userId)
         {
             try
@@ -66,10 +69,12 @@ namespace eBuy.Implementation
                 return false;
             }
         }
+        //Get all products added to the cart
         public List<Cart> AllUserCart(string userId)
         {
             return _context.Cart.Where(x => x.Id != x.Deleted && x.UserId == userId).ToList();
         }
+        //View all products added to cart
         public CartViewModel ViewCart(string userId)
         {
             List<CartProducts> cartProducts = new List<CartProducts>();
@@ -82,6 +87,7 @@ namespace eBuy.Implementation
             int count = UserCartCount(userId);
             return new CartViewModel { CartProducts = cartProducts, CartCount = count };
         }
+        //Remove product from cart
         public async Task<bool> RemoveCartItem(int cartId, string userId)
         {
             try

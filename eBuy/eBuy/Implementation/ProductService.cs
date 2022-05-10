@@ -22,6 +22,7 @@ namespace eBuy.Implementation
             _context = context;
             _customMapping = customMapping;
         }
+        //Add new product
         public async Task<bool> AddNewProductAsync(ProductsViewModel productViewModel)
         {
             try
@@ -55,6 +56,7 @@ namespace eBuy.Implementation
             }
 
         }
+        //Add product Image
         public async Task<ProductImages> AddProductImage(IFormFile formFile, Guid productId)
         {
             return new ProductImages()
@@ -65,18 +67,22 @@ namespace eBuy.Implementation
                 DateModified = DateTime.Now
             };
         }
+        //Get a particular product
         public Products GetProduct(Guid? productId)
         {
             return _context.Products.Where(x => x.Id != x.Deleted && x.ProductId == productId).FirstOrDefault();
         }
+        //Get product even when deleted from the product table
         public Products GetProductEvenWhenDeleted(Guid? productId)
         {
             return _context.Products.Where(x => x.ProductId == productId).FirstOrDefault();
         }
+        //Get product Image
         public ProductImages GetProductImage(Guid? productId)
         {
             return _context.ProductImages.Where(x => x.Id != x.Deleted && x.ProductId == productId).FirstOrDefault();
         }
+        //Update product
         public async Task<bool> EditProduct(Guid productId, EditProductsViewModel productViewModel)
         {
             try
@@ -110,6 +116,7 @@ namespace eBuy.Implementation
                 return false;
             }
         }
+        //Delete Product
         public async Task<bool> DeleteProduct(Guid productId)
         {
             try
@@ -141,10 +148,12 @@ namespace eBuy.Implementation
                 return false;
             }
         }
+        //Get all products
         public List<Products> GetAllProduct()
         {
             return _context.Products.Where(x => x.Id != x.Deleted && x.IsEnabled).ToList();
         }
+        //Specific Product and User Details based on the IDs
         public UserProductsViewModels ProductAndUser(Guid productId, string userId)
         {
             Products products = GetProductEvenWhenDeleted(productId);
