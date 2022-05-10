@@ -1,9 +1,7 @@
-﻿using eBuy.Models;
+﻿using eBuy.Data;
+using eBuy.Models;
 using eBuy.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace eBuy.EntityMapping
 {
@@ -30,6 +28,27 @@ namespace eBuy.EntityMapping
             viewProducts.Name = products.Name;
             viewProducts.File = "data:image/png;base64," + Convert.ToBase64String(productImage.Image);
             return viewProducts;
+        }
+        public CartProducts OutMap(Cart cart, Products product, CartProducts cartProduct)
+        {
+            cartProduct.Id = cart.Id;
+            cartProduct.UnitPrice = product.UnitPrice;
+            cartProduct.Quantity = cart.Quantity;
+            cartProduct.Name = product.Name;
+            return cartProduct;
+        }
+        public UserProductsViewModels OutMap(Products product, ApplicationUser user, UserProductsViewModels viewModel)
+        {
+            viewModel.ProductName = product.Name;
+            viewModel.UnitPrice = product.UnitPrice;
+            viewModel.Quantity = product.Quantity;
+            viewModel.Description = product.Description;
+            viewModel.FirstName = user.FirstName;
+            viewModel.LastName = user.LastName;
+            viewModel.Email = user.Email;
+            viewModel.UserName = user.UserName;
+            viewModel.Phone = user.PhoneNumber;
+            return viewModel;
         }
     }
 }

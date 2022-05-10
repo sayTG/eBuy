@@ -5,7 +5,7 @@
 
 
 var dataTable;
-function loadDataTable(controller, columns, order = 1, tableName = '#DT_load', headCreated = false) {
+function loadDataTable(controller, columns, order = 1, method = 'getall', tableName = '#DT_load', headCreated = false) {
     if (!headCreated) {
         tableHead = $(tableName + ' thead');
         tableHeadColumns = $(tableName + ' thead th');
@@ -71,7 +71,7 @@ function loadDataTable(controller, columns, order = 1, tableName = '#DT_load', h
             }
         ],
         "ajax": {
-            "url": "/" + controller + "/getall",
+            "url": "/" + controller + "/" + method,
             "timeout": 600000,
             "type": "POST",
 

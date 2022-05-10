@@ -115,3 +115,13 @@ body {
 .prod-quantity {
     padding: 3px;
 }
+span.badge.rounded-pill {
+    font-size: initial;
+}
+.fw-bold {
+    font-weight: bolder;
+    font-size: initial;
+}
+label.total {
+    padding: 15px;
+}

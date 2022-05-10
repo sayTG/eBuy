@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eBuy.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,5 +11,7 @@ namespace eBuy.Abstractions
         int UserCartCount(string userId);
         Task<bool> AddToCart(Guid productId, int quantity, string userId);
         int ActiveCartQuantity(string userId, Guid productId);
+        CartViewModel ViewCart(string userId);
+        Task<bool> RemoveCartItem(int cartId, string userId);
     }
 }

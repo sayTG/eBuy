@@ -1,5 +1,6 @@
 ﻿using eBuy.Abstractions;
 using eBuy.Data;
+using eBuy.EntityMapping;
 using eBuy.Models;
 using eBuy.Utilities;
 using eBuy.ViewModels;
@@ -14,10 +15,12 @@ namespace eBuy.Implementation
     public class ProductService : IProductService
     {
         private readonly ApplicationDbContext _context;
+        private readonly ICustomMapping _customMapping;
 
-        public ProductService(ApplicationDbContext context)
+        public ProductService(ApplicationDbContext context, ICustomMapping customMapping)
         {
             _context = context;
+            _customMapping = customMapping;
         }
         public async Task<bool> AddNewProductAsync(ProductsViewModel productViewModel)
         {
@@ -65,6 +68,10 @@ namespace eBuy.Implementation
         public Products GetProduct(Guid? productId)
         {
             return _context.Products.Where(x => x.Id != x.Deleted && x.ProductId == productId).FirstOrDefault();
+        }
+        public Products GetProductEvenWhenDeleted(Guid? productId)
+        {
+            return _context.Products.Where(x => x.ProductId == productId).FirstOrDefault();
         }
         public ProductImages GetProductImage(Guid? productId)
         {
@@ -136,7 +143,13 @@ namespace eBuy.Implementation
         }
         public List<Products> GetAllProduct()
         {
-            return _context.Products.Where(x => x.Id != x.Deleted).ToList();
+            return _context.Products.Where(x => x.Id != x.Deleted && x.IsEnabled).ToList();
+        }
+        public UserProductsViewModels ProductAndUser(Guid productId, string userId)
+        {
+            Products products = GetProductEvenWhenDeleted(productId);
+            ApplicationUser applicationUser = _context.Users.Where(x => x.Id == userId).FirstOrDefault();
+            return _customMapping.OutMap(products, applicationUser, new UserProductsViewModels());
         }
     }
 }

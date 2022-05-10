@@ -4,8 +4,6 @@ using eBuy.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace eBuy.Controllers
@@ -28,14 +26,28 @@ namespace eBuy.Controllers
             if (result)
             {
                 HomeViewModel viewModel = _homeService.DisplayProducts(userId);
-                return View("~/Views/Home/Index", viewModel);
+                return View("~/Views/Home/Index.cshtml", viewModel);
             }
             else
                 return View("~/Views/500.cshtml");
         }
         public IActionResult Index()
         {
-            return View();
+            string userId = _userManager.GetUserId(HttpContext.User);
+            CartViewModel cartView = _cartService.ViewCart(userId);
+            return View(cartView);
+        }
+        public async Task<IActionResult> Remove(int cartId)
+        {
+            string userId = _userManager.GetUserId(HttpContext.User);
+            bool result = await _cartService.RemoveCartItem(cartId, userId);
+            if (result)
+            {
+                CartViewModel cartView = _cartService.ViewCart(userId);
+                return View("index", cartView);
+            }
+            else
+                return View("~/Views/500.cshtml");
         }
     }
 }

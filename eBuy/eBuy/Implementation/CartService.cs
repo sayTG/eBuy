@@ -2,7 +2,9 @@
 using eBuy.Data;
 using eBuy.EntityMapping;
 using eBuy.Models;
+using eBuy.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -33,7 +35,7 @@ namespace eBuy.Implementation
             try
             {
                 _context.Database.BeginTransaction();
-                Cart existingProduct = _context.Cart.Where(x => x.ProductId == productId && x.UserId == userId).FirstOrDefault();
+                Cart existingProduct = _context.Cart.Where(x => x.ProductId == productId && x.UserId == userId && x.Id != x.Deleted).FirstOrDefault();
                 if (existingProduct != null)
                 {
                     existingProduct.Quantity = quantity;
@@ -56,6 +58,46 @@ namespace eBuy.Implementation
                 }
                 _context.Database.CommitTransaction();
                 return true;
+            }
+            catch (Exception e)
+            {
+                _context.Database.RollbackTransaction();
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+        public List<Cart> AllUserCart(string userId)
+        {
+            return _context.Cart.Where(x => x.Id != x.Deleted && x.UserId == userId).ToList();
+        }
+        public CartViewModel ViewCart(string userId)
+        {
+            List<CartProducts> cartProducts = new List<CartProducts>();
+            List<Cart> carts = AllUserCart(userId);
+            foreach(Cart cart in carts)
+            {
+                Products product = _productService.GetProduct(cart.ProductId);
+                cartProducts.Add(_customMapping.OutMap(cart, product, new CartProducts()));
+            }
+            int count = UserCartCount(userId);
+            return new CartViewModel { CartProducts = cartProducts, CartCount = count };
+        }
+        public async Task<bool> RemoveCartItem(int cartId, string userId)
+        {
+            try
+            {
+                Cart existingCart = _context.Cart.Where(x => x.Id == cartId && x.UserId == userId && x.Id != x.Deleted).FirstOrDefault();
+                if (existingCart != null)
+                {
+                    _context.Database.BeginTransaction();
+                    existingCart.Deleted = cartId;
+                    existingCart.DateModified = DateTime.Now;
+                    _context.Update(existingCart);
+                    await _context.SaveChangesAsync();
+                    _context.Database.CommitTransaction();
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {

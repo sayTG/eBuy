@@ -5,6 +5,7 @@ using eBuy.DTOs;
 using eBuy.EntityMapping;
 using eBuy.Models;
 using eBuy.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -17,12 +18,13 @@ namespace eBuy.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IProductService _productService;
         private readonly ICustomMapping _customMapping;
-
-        public AdminController(ApplicationDbContext context, IProductService productService, ICustomMapping customMapping)
+        private UserManager<ApplicationUser> _userManager;
+        public AdminController(ApplicationDbContext context, IProductService productService, ICustomMapping customMapping, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _productService = productService;
             _customMapping = customMapping;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
@@ -31,6 +33,15 @@ namespace eBuy.Controllers
         public IActionResult Manage()
         {
             return View();
+        }
+        public IActionResult Removed()
+        {
+            return View();
+        }
+        public IActionResult Details(Guid productId, string userId)
+        {
+            UserProductsViewModels viewModel = _productService.ProductAndUser(productId, userId);
+            return View(viewModel);
         }
         public IActionResult Create()
         {
@@ -111,6 +122,21 @@ namespace eBuy.Controllers
                             dateModified = p.DateModified
                         };
             var parser = new Parser<ProductDTO>(Request.Form, query);
+            return Json(parser.Parse());
+        }
+        public IActionResult AllRemoved()
+        {
+            var query = from p in _context.Cart.Where(p => p.Id == p.Deleted)
+                        select new RemovedDTO
+                        {
+                            id = p.Id,
+                            productId = p.ProductId,
+                            userId = p.UserId,
+                            quantity = p.Quantity,
+                            dateCreated = p.DateCreated,
+                            dateModified = p.DateModified
+                        };
+            var parser = new Parser<RemovedDTO>(Request.Form, query);
             return Json(parser.Parse());
         }
         #endregion

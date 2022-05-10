@@ -1,0 +1,43 @@
+﻿@model eBuy.ViewModels.ProductsViewModel
+
+<div class="container">
+
+    <table id="DT_load" class="table table-striped">
+        <thead>
+            <tr>
+                <th class="pl-2">#</th>
+                <th class="pl-2">ProductID</th>
+                <th class="pl-2">UserID</th>
+                <th class="pl-2">Quantity</th>
+                <th class="pl-2">Date Created</th>
+                <th class="pl-2">Date Modified</th>
+                <th class="text-center">Actions</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var controller = "admin";
+            var columns = [
+                { "data": "id" },
+                { "data": "productId" },
+                { "data": "userId" },
+                { "data": "quantity" },
+                { "data": "dateCreated" },
+                { "data": "dateModified" },
+                {
+                    'data': function (data) {
+                        return `<div class="text-center"><a href="/${controller}/details?productId=${data.productId}&userId=${data.userId}"><span class="fa fa-eye"></span></a></div>`
+                    }
+                },
+                { "data": "id" }
+            ];
+            loadDataTable(controller, columns, 5, 'allremoved');
+        });
+    </script>
+}

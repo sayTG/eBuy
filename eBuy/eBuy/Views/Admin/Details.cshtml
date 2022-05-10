@@ -1,0 +1,65 @@
+﻿@model eBuy.ViewModels.UserProductsViewModels
+
+USER DETAILS
+<div class="row pt-5">
+    <form class="col-lg-12">
+        <div class="d-lg-flex  mb-lg-4">
+            <div class="col-lg-4">
+                <label class="control-label">Username</label>
+                <input asp-for="Email" class="form-control" disabled />
+            </div>
+            <div class="col-lg-4">
+                <label class="control-label">First Name</label>
+                <input asp-for="FirstName" class="form-control" disabled />
+            </div>
+            <div class="col-lg-4">
+                <label class="control-label">Last Name</label>
+                <input asp-for="LastName" class="form-control" disabled />
+            </div>
+        </div>
+
+        <div class="d-lg-flex  mb-lg-4">
+            <div class="col-lg-6">
+                <label class="control-label">Telephone</label>
+                <input asp-for="Phone" class="form-control" disabled />
+            </div>
+            <div class="col-lg-6">
+                <label class="control-label">Email</label>
+                <input asp-for="Email" class="form-control" disabled />
+            </div>
+        </div>
+    </form>
+</div>
+
+<hr/>
+
+PRODUCT DETAILS
+<div class="row pt-5 p-2">
+    <form class="col-lg-12">
+        <div class="d-lg-flex  mb-lg-4">
+            <div class="col-lg-4">
+                <label class="control-label">Product Name</label>
+                <input asp-for="ProductName" class="form-control" disabled />
+            </div>
+            <div class="col-lg-4">
+                <label class="control-label">Description</label>
+                <input asp-for="Description" class="form-control" disabled />
+            </div>
+        </div>
+
+        <div class="d-lg-flex  mb-lg-4">
+            <div class="col-lg-6">
+                <label class="control-label">Unit Price</label>
+                <input asp-for="UnitPrice" class="form-control" disabled />
+            </div>
+            <div class="col-lg-6">
+                <label class="control-label">Quantity</label>
+                <input asp-for="Quantity" class="form-control" disabled />
+            </div>
+        </div>
+    </form>
+</div>
+
+<div>
+    <a asp-action="Removed">Back to List</a>
+</div>
