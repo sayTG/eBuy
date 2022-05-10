@@ -14,7 +14,7 @@ namespace eBuy.Abstractions
         Task<ProductImages> AddProductImage(IFormFile formFile, Guid productId);
         Products GetProduct(Guid? productId);
         ProductImages GetProductImage(Guid? productId);
-        Task<bool> EditProduct(Guid productId, ProductsViewModel productViewModel);
+        Task<bool> EditProduct(Guid productId, EditProductsViewModel productViewModel);
         Task<bool> DeleteProduct(Guid productId);
         List<Products> GetAllProduct();
         UserProductsViewModels ProductAndUser(Guid productId, string userId);

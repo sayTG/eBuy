@@ -77,7 +77,7 @@ namespace eBuy.Implementation
         {
             return _context.ProductImages.Where(x => x.Id != x.Deleted && x.ProductId == productId).FirstOrDefault();
         }
-        public async Task<bool> EditProduct(Guid productId, ProductsViewModel productViewModel)
+        public async Task<bool> EditProduct(Guid productId, EditProductsViewModel productViewModel)
         {
             try
             {
@@ -90,10 +90,10 @@ namespace eBuy.Implementation
                 product.UnitPrice = productViewModel.UnitPrice;
                 product.Quantity = productViewModel.Quantity <= 0 ? 1 : productViewModel.Quantity;
 
-                if (productViewModel.File != null)
+                if (productViewModel.UpdatedFile != null)
                 {
                     ProductImages image = GetProductImage(productId);
-                    image.Image = await productViewModel.File.FormFileGetBytes();
+                    image.Image = await productViewModel.UpdatedFile.FormFileGetBytes();
                     image.DateModified = DateTime.Now;
                     _context.Update(image);
                 }

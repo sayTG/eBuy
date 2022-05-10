@@ -19,6 +19,7 @@ namespace eBuy.Controllers
             _homeService = homeService;
             _cartService = cartService;
         }
+        //Add product to Cart
         public async Task<IActionResult> AddToCart(Guid productId, int quantity)
         {
             string userId = _userManager.GetUserId(HttpContext.User);
@@ -31,12 +32,14 @@ namespace eBuy.Controllers
             else
                 return View("~/Views/500.cshtml");
         }
+        //Cart Index page
         public IActionResult Index()
         {
             string userId = _userManager.GetUserId(HttpContext.User);
             CartViewModel cartView = _cartService.ViewCart(userId);
             return View(cartView);
         }
+        //Remove products from cart
         public async Task<IActionResult> Remove(int cartId)
         {
             string userId = _userManager.GetUserId(HttpContext.User);

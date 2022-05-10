@@ -26,7 +26,7 @@ namespace eBuy.Controllers
             _homeService = homeService;
             _cartService = cartService;
         }
-
+        //Home page for products
         public IActionResult Index()
         {
             string userId = _userManager.GetUserId(HttpContext.User);

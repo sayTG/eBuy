@@ -1,4 +1,4 @@
-﻿@model eBuy.ViewModels.ProductsViewModel
+﻿@model eBuy.ViewModels.EditProductsViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -50,15 +50,18 @@
                     <input asp-for="UnitPrice" class="form-control" type="number" required />
                     <span asp-validation-for="UnitPrice" class="text-danger"></span>
                 </div>
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-12 d-flex d-inline">
                     <label asp-for="IsEnabled" class="control-label">Enabled</label>
                     <input asp-for="IsEnabled" class="form-control" type="checkbox" />
                     <span asp-validation-for="IsEnabled" class="text-danger"></span>
                 </div>
+                <div class="form-group col-md-12 d-flex justify-content-center">
+                    <img class="picture" src="@Model.File" alt="Logo" />
+                </div>
                 <div class="form-group col-md-12">
-                    <label asp-for="File" class="control-label">Update Product Image</label>
-                    <input asp-for="File" class="form-control" type="file" accept=".png,.jpg,.jpeg" />
-                    <span asp-validation-for="File" class="text-danger"></span>
+                    <label asp-for="UpdatedFile" class="control-label">Update Product Image</label>
+                    <input asp-for="UpdatedFile" class="form-control" type="file" accept=".png,.jpg,.jpeg" />
+                    <span asp-validation-for="UpdatedFile" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-12">
                     <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />

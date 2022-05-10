@@ -14,5 +14,6 @@ namespace eBuy.EntityMapping
         HomeViewProducts OutMap(Products products, ProductImages productImage, HomeViewProducts viewProducts);
         CartProducts OutMap(Cart cart, Products product, CartProducts cartProduct);
         UserProductsViewModels OutMap(Products product, ApplicationUser user, UserProductsViewModels viewModel);
+        EditProductsViewModel OutMap(Products products, ProductImages image, EditProductsViewModel productsViewModel);
     }
 }

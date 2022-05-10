@@ -19,6 +19,19 @@ namespace eBuy.EntityMapping
             productsViewModel.IsEnabled = products.IsEnabled;
             return productsViewModel;
         }
+        public EditProductsViewModel OutMap(Products products, ProductImages image, EditProductsViewModel productsViewModel)
+        {
+            productsViewModel.ProductId = products.ProductId;
+            productsViewModel.DateCreated = products.DateCreated;
+            productsViewModel.DateModified = products.DateModified;
+            productsViewModel.UnitPrice = products.UnitPrice;
+            productsViewModel.Quantity = products.Quantity;
+            productsViewModel.Description = products.Description;
+            productsViewModel.Name = products.Name;
+            productsViewModel.IsEnabled = products.IsEnabled;
+            productsViewModel.File = "data:image/png;base64," + Convert.ToBase64String(image.Image);
+            return productsViewModel;
+        }
         public HomeViewProducts OutMap(Products products, ProductImages productImage, HomeViewProducts viewProducts)
         {
             viewProducts.ProductId = products.ProductId;

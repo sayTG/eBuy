@@ -28,23 +28,28 @@ namespace eBuy.Controllers
             _customMapping = customMapping;
             _userManager = userManager;
         }
+        //Admin Dashoard Index page
         public IActionResult Index()
         {
             return View();
         }
+        //Admin page to manage products
         public IActionResult Manage()
         {
             return View();
         }
+        //Admin page to view removed products
         public IActionResult Removed()
         {
             return View();
         }
+        //Admin page to check the details of product
         public IActionResult Details(Guid productId, string userId)
         {
             UserProductsViewModels viewModel = _productService.ProductAndUser(productId, userId);
             return View(viewModel);
         }
+        //Admin page to create product
         public IActionResult Create()
         {
             return View();
@@ -71,19 +76,21 @@ namespace eBuy.Controllers
             }
             return View("create", product);
         }
+        //Admin page to edit product
         public IActionResult Edit(Guid? productId)
         {
             if (productId == null)
                 return View("~/Views/404.cshtml");
             Products product = _productService.GetProduct(productId);
-            ProductsViewModel productsViewModel = _customMapping.OutMap(product, new ProductsViewModel());
+            ProductImages image = _productService.GetProductImage(productId);
+            EditProductsViewModel productsViewModel = _customMapping.OutMap(product, image, new EditProductsViewModel());
             if (product == null)
                 return View("~/Views/404.cshtml");
             return View(productsViewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid productId, ProductsViewModel productsViewModel)
+        public async Task<IActionResult> Edit(Guid productId, EditProductsViewModel productsViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -98,6 +105,7 @@ namespace eBuy.Controllers
             }
             return View("edit", productsViewModel);
         }
+        //Admin page to delete product
         public async Task<IActionResult> Delete(Guid productId)
         {
             bool response = await _productService.DeleteProduct(productId);
