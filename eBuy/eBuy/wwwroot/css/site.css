@@ -125,3 +125,7 @@ span.badge.rounded-pill {
 label.total {
     padding: 15px;
 }
+.d-inline-flex {
+    height: fit-content;
+    margin: 10px;
+}
