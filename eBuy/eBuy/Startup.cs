@@ -57,6 +57,7 @@ namespace eBuy
             {
                 options.LoginPath = "/Identity/Account/Login";
                 options.SlidingExpiration = true;
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
             });
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICustomMapping, CustomMapping>();
