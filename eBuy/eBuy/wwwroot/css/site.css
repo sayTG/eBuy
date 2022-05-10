@@ -76,8 +76,8 @@ body {
     margin: 20px;
 }
 .picture {
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     object-fit: cover;
 }
 .title {
@@ -98,6 +98,7 @@ body {
 .details {
     margin-top: 5px;
     padding: 5px 10px;
+    width: 250px;
 }
 .product-title {
     font-size: 20px;
@@ -128,4 +129,7 @@ label.total {
 .d-inline-flex {
     height: fit-content;
     margin: 10px;
+}
+.description {
+    overflow-wrap: break-word;
 }

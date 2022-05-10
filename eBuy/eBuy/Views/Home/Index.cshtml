@@ -8,7 +8,7 @@
             <button class="btn btn-info" type="button">Search</button>
         </span>
     </div>
-    
+
     <div class="cart">
         <i class="fas fa-shopping-cart fa-lg"></i> @Html.ActionLink("Cart(" + Model.CartCount + ")", "Index", "Cart", null, new { @class = "cart-text" })
     </div>
@@ -21,35 +21,33 @@
 }
 else
 {
-    <div class="item-grid">
+    <div class="item-grid d-flex flex-wrap">
         @foreach (var product in Model.HomeViewProducts)
         {
             using (Html.BeginForm("AddToCart", "Cart"))
             {
-                <div class="item-box">
-                    <div class="product-item">
-                        <input type="hidden" value="@product.ProductId" name="productID" />
-                        <img class="picture" src="@product.File" alt="Logo" />
-                        <div class="details">
-                            <h2 class="product-title">@product.Name</h2>
-                            <div class="description">
-                                @product.Description
-                            </div>
-                            <div class="add-info">
-                                <div class="prices"><span class="price actual-price">&#8358; @product.UnitPrice</span></div>
-                            </div>
-                            <div class="add-to-cart">
-                                <div class="add-to-cart-panel">
-                                    @if (product.Quantity > 0)
-                                    {
-                                        <input type="number" min="1" max="@product.Quantity" value="@product.QuantityAdded" class="prod-quantity" name="quantity"/>
-                                        <input type="submit" value="Add to Cart" class="btn btn-primary btn-sm" />
-                                    }
-                                    else
-                                    {
-                                        <input type="text" value="Out of Stock" disabled class="text-danger" />
-                                    }
-                                </div>
+                <div class="item-box d-flex col-auto flex-column p-2">
+                    <input type="hidden" value="@product.ProductId" name="productID" />
+                    <img class="picture" src="@product.File" alt="Logo" />
+                    <div class="details d-flex flex-column">
+                        <h2 class="product-title mb-2">@product.Name</h2>
+                        <div class="description mb-2">
+                            @product.Description
+                        </div>
+                        <div class="add-info mb-2">
+                            <div class="prices"><span class="price actual-price">&#8358; @product.UnitPrice</span></div>
+                        </div>
+                        <div class="add-to-cart">
+                            <div class="add-to-cart-panel">
+                                @if (product.Quantity > 0)
+                                {
+                                    <input type="number" min="1" max="@product.Quantity" value="@product.QuantityAdded" class="prod-quantity" name="quantity" />
+                                    <input type="submit" value="Add to Cart" class="btn btn-primary btn-sm" />
+                                }
+                                else
+                                {
+                                    <input type="text" value="Out of Stock" disabled class="text-danger" />
+                                }
                             </div>
                         </div>
                     </div>
